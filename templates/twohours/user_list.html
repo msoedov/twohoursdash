@@ -1,0 +1,43 @@
+{% load bootstrap3 %}
+{% load th_tags %}
+{% bootstrap_css %}
+
+<a href="{% url 'twohours:user_csv'%}" class="btn btn-primary">
+    {% bootstrap_icon "star" %} As Csv
+</a>
+
+<div class="container">
+    <table id="table-transform" data-toolbar="#transform-buttons">
+        <thead>
+        <tr>
+            <th width="10%">ID</th>
+            <th width="10%">Username</th>
+            <th width="10%">Birthday</th>
+            <th width="10%">Eligible</th>
+            <th width="10%">Random Number</th>
+            <th width="10%">BizzFizz</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        {% for object in object_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'twohours:user_details' pk=object.pk %}">
+                        {{ object.pk }}
+                    </a>
+                </td>
+                <td>{{ object.username }}</td>
+                <td>{{ object.birthday | date:"d/m/Y" }}</td>
+                <td>{{ object.birthday| eligible }}</td>
+                <td>{{ object.random }}</td>
+                <td>{{ object.random | bizz}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% bootstrap_javascript %}
